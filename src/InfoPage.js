@@ -8,7 +8,25 @@ import {
   TouchableOpacity,
 } from 'react-native'
 
+export function infoPageReducer(state = '', action) {
+  switch (action.type) {
+    case 'INFO_PAGE':
+      return action.payload
+    default:
+      return state
+  }
+}
+
 export default class InfoPage extends Component {
+  componentWillMount() {
+    alert('InfoPage componentWillMount')
+  }
+  componentDidMount() {
+    alert('InfoPage componentDidMount')
+  }
+  componentWillReceiveProps() {
+    alert('InfoPage componentWillReceiveProps')
+  }
   render() {
     const { navigation } = this.props
     return (
