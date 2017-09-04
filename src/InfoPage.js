@@ -5,7 +5,7 @@ import React, { Component } from 'react'
 import {
   View,
   Text,
-  TouchableOpacity,
+  Button,
 } from 'react-native'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
@@ -41,14 +41,18 @@ class InfoPage extends Component {
     const { navigation } = this.props
     return (
       <View>
-        <TouchableOpacity
+        <Button
+          title="不改变props返回"
+          onPress={() => navigation.goBack()}
+        />
+        <Button
+          title="改变props返回"
           onPress={() => {
-            this.props.homePageAction('infoPage back')
+            this.props.homePageAction('homePage props改变')
             navigation.goBack()
           }}
-        >
-          <Text>{`这是${this.props.page}`}</Text>
-        </TouchableOpacity>
+        />
+        <Text>{`这是${this.props.page}`}</Text>
       </View>
     )
   }
