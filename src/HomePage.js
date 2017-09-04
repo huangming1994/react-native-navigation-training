@@ -20,7 +20,7 @@ export function homePageReducer(state = '', action) {
 }
 
 function homePageAction() {
-  return { type: 'HOME_PAGE', payload: 111 }
+  return { type: 'HOME_PAGE', payload: 'homePage' }
 }
 
 class HomePage extends Component {
@@ -35,8 +35,7 @@ class HomePage extends Component {
     return (
       <View>
         <TouchableOpacity onPress={() => navigate('Info')}>
-          <Text>这是HomePage</Text>
-          <Text>{this.props.stuff}</Text>
+          <Text>{`这是${this.props.page}`}</Text>
         </TouchableOpacity>
       </View>
     )
@@ -45,7 +44,7 @@ class HomePage extends Component {
 
 function mapStateToProps(state) {
   return {
-    stuff: state.homePage
+    page: state.homePage
   }
 }
 

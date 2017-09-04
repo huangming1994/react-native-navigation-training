@@ -7,6 +7,9 @@ import {
   Text,
   TouchableOpacity,
 } from 'react-native'
+import { connect } from 'react-redux'
+import { compose } from 'redux'
+
 
 export function infoPageReducer(state = '', action) {
   switch (action.type) {
@@ -17,24 +20,39 @@ export function infoPageReducer(state = '', action) {
   }
 }
 
-export default class InfoPage extends Component {
+function infoPageAction() {
+  return { type: 'INFO_PAGE', payload: 'infoPage' }
+}
+
+class InfoPage extends Component {
   componentWillMount() {
-    alert('InfoPage componentWillMount')
   }
   componentDidMount() {
-    alert('InfoPage componentDidMount')
+    this.props.infoPageAction()
   }
-  componentWillReceiveProps() {
-    alert('InfoPage componentWillReceiveProps')
-  }
+
   render() {
     const { navigation } = this.props
     return (
       <View>
         <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Text>这是InfoPage</Text>
+          <Text>{`这是${this.props.page}`}</Text>
         </TouchableOpacity>
       </View>
     )
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    page: state.infoPage
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    infoPageAction: compose(dispatch, infoPageAction)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(InfoPage)
