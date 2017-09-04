@@ -19,18 +19,24 @@ export function homePageReducer(state = '', action) {
   }
 }
 
-function homePageAction() {
-  return { type: 'HOME_PAGE', payload: 'homePage' }
+export function homePageAction(payload) {
+  return { type: 'HOME_PAGE', payload }
 }
 
 class HomePage extends Component {
   componentWillMount() {
   }
   componentDidMount() {
-    this.props.homePageAction()
+    this.props.homePageAction('homePage')
+  }
+  componentWillReceiveProps() {
+    alert('homePage componentWillReceiveProps')
+  }
+  componentWillUnmount() {
+    alert('homePage componentWillUnmount')
   }
   render() {
-    console.log('this.props', this.props)
+    console.log('this.props--------------->', this.props)
     const { navigate } = this.props.navigation
     return (
       <View>

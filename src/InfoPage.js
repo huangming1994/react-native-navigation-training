@@ -9,6 +9,7 @@ import {
 } from 'react-native'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
+import { homePageAction } from './HomePage'
 
 
 export function infoPageReducer(state = '', action) {
@@ -30,12 +31,22 @@ class InfoPage extends Component {
   componentDidMount() {
     this.props.infoPageAction()
   }
-
+  componentWillReceiveProps() {
+    alert('InfoPage componentWillReceiveProps')
+  }
+  componentWillUnmount() {
+    alert('InfoPage componentWillUnmount')
+  }
   render() {
     const { navigation } = this.props
     return (
       <View>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
+        <TouchableOpacity
+          onPress={() => {
+            this.props.homePageAction('infoPage back')
+            navigation.goBack()
+          }}
+        >
           <Text>{`这是${this.props.page}`}</Text>
         </TouchableOpacity>
       </View>
@@ -51,7 +62,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    infoPageAction: compose(dispatch, infoPageAction)
+    infoPageAction: compose(dispatch, infoPageAction),
+    homePageAction: compose(dispatch, homePageAction),
   }
 }
 
